@@ -1,0 +1,174 @@
+<!--pages/habit/group/edit.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <form catchsubmit="editGroupSubmit">
+      <view class="weui-cells">
+        <view class="weui-cell" bindtap="viewGroupImageTap">
+          <view class="weui-cell__hd">
+            <view class="weui-label">圈子头像</view>
+
+          </view>
+          <view class="weui-cell__bd ">
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            <image class="weui-media-box__thumb weui-media-box__thumb-group" src="{{group.imgurl}}" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">圈子名称</view>
+          </view>
+          <view class="weui-cell__bd ">
+            <input class="weui-input" type="text" value="{{group.name}}" name="group_name" maxlength="20" disabled="{{!is_creator}}" />
+          </view>
+        </view>
+
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <view class="weui-label">圈子介绍</view>
+          </view>
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="" style="min-height:1.4em; height:4.3em;" auto-height='true' name="introduction" value="{{group.introduction}}" maxlength="200" disabled="{{!is_creator}}" />
+          </view>
+        </view>
+        <view class="weui-cell" wx:if="{{is_creator}}">
+          <button class="weui-btn" type="default" size="mini" form-type="submit">保存</button>
+        </view>
+      </view>
+    </form>
+
+    <view class="weui-cells">
+      <view class="weui-cell" bindtap="viewGroupQrcodeTap">
+        <view class="weui-cell__hd">
+          <view class="weui-label">圈子二维码</view>
+        </view>
+        <view class="weui-cell__bd ">
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <image style="width:16px;height:16px;" src="/image/qrcode.png"></image>
+        </view>
+      </view>
+      <view class="weui-cell" bindtap="viewGroupMemberTap">
+        <view class="weui-cell__hd">
+          <view class="weui-label">圈子成员</view>
+        </view>
+        <view class="weui-cell__bd ">
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          {{group.number}}个
+        </view>
+      </view>
+
+      <view class="weui-cell" bindtap="viewGroupTargetTap">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">圈子任务</view>
+        </view>
+        <view class="weui-cell__bd ">
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          {{group.target_counter}}个
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells">
+      <view class="weui-cell" bindtap="exportGroupTargetTap">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">导出打卡数据</view>
+        </view>
+        <view class="weui-cell__bd ">
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+        </view>
+      </view>
+    </view>
+
+    <form catchsubmit="remindTimeSubmit" report-submit='true'>
+
+      <view class="weui-cells">
+
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">打卡提醒</view>
+          <view class="weui-cell__ft">
+            <switch checked="{{allow_remind}}" bindchange="allowRemindChangeTap" color="#2ECB7E" />
+          </view>
+        </view>
+        <block wx:if="{{allow_remind}}">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">提醒时间</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="time" value="{{remind_time}}" start="00:00" end="23:59" bindchange="bindRemindTimeChange">
+                <view class="weui-input">{{remind_time}}</view>
+              </picker>
+            </view>
+            <view class="weui-cell__ft">
+              <button class="weui-btn" type="default" size="mini" form-type="submit">保存</button>
+            </view>
+          </view>
+
+        </block>
+      </view>
+      <view class="weui-cells__tips" wx:if="{{allow_remind}}"> 开启并保存提醒后，会在打卡的第二天提醒时间5分钟左右收到微信的打卡消息提醒
+      </view>
+    </form>
+    <!--
+        <form catchsubmit="nicknameSubmit" report-submit='true'>
+
+      <view class="weui-cells">
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">我的昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+                          <input class="weui-input" type="text" value="{{group.name}}" name="nickname" maxlength="20" disabled="{{!is_creator}}" />
+
+            </view>
+            <view class="weui-cell__ft">
+              <button class="weui-btn" type="default" size="mini" form-type="submit">保存</button>
+            </view>
+          </view>
+
+      </view>
+      <view class="weui-cells__tips">我在本小圈子的昵称
+      </view>
+    </form>
+    -->
+
+    <view class="weui-cells">
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">允许加入</view>
+        <view class="weui-cell__ft">
+          <switch checked="{{group.allow_join==1?true:false}}" disabled="{{!is_creator}}" bindchange="allowJoinChangeTap" color="#2ECB7E" />
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{is_creator}}" class="weui-cells__tips">关闭后他人将无法加入小圈子</view>
+    <view class="weui-cells">
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">开启目标打卡天数</view>
+        <view class="weui-cell__ft">
+          <switch checked="{{is_target_day}}" disabled="{{!is_creator}}" bindchange="targetDayChangeTap" color="#2ECB7E" />
+        </view>
+      </view>
+      <view wx:if="{{is_target_day}}" class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">目标天数</view>
+        </view>
+        <view class="weui-cell__bd ">
+          <input class="weui-input" type="number" value="{{target_day}}" name="target_day" disabled="{{!is_creator}}" bindinput="targetDayBindChange" />
+        </view>
+        <view class="weui-cell__ft" wx:if="{{is_creator}}">
+          <button class="weui-btn" type="default" size="mini" bindtap="targetDaySubmint">保存</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-btn-area">
+      <button wx:if="{{group.is_join}}" class="weui-btn" type="warn" bindtap="quitGroupTap">退出圈子</button>
+    </view>
+  </view>
+</view>

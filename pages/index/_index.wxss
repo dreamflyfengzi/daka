@@ -1,0 +1,18 @@
+/**index.wxss**/
+@import "../common/dakaui.wxss";
+
+.daka-motto {
+  text-align: center;
+}
+
+.weui-loadmore__tips_in-line {
+  background-color: #f8f8f8;
+}
+
+.daka-nogroup-tip {
+  text-align: center;
+  margin-top: 100px;
+}
+.weui-media-box__desc-daka{
+  text-align: right;
+}

@@ -1,0 +1,36 @@
+<!--/pages/habit/profile/setting.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="logo">
+      <image class="logo-image" src="/image/logo.png" background-size="cover"></image>
+      <text class="logo-name">一起来打卡</text>
+      <text class="logo-version">v2.2</text>
+    </view>
+    <view class="weui-cells yyui-cells">
+      <view class="weui-cell yyui-cell">
+        <view class="weui-cell__bd">邮箱</view>
+        <view class="weui-cell__ft"><text>fengzi.dreamfly@gmail.com</text></view>
+      </view>
+      <view class="weui-cell yyui-cell">
+        <view class="weui-cell__bd">微信</view>
+        <view class="weui-cell__ft"><text>dreamflyfengzi</text></view>
+      </view>
+      <view class="weui-cell yyui-cell">
+        <view class="weui-cell__bd">AppID</view>
+        <view class="weui-cell__ft"><text>wxc96b50e5210ab459</text></view>
+      </view>
+    </view>
+
+    <view class="logo" style="margin-top:10px;">
+      <text class="logo-name">合作请联系我们</text>
+    </view>
+    <view class="logo" style="margin-top:10px;">
+      <view class="logo-qrcodes">
+        <image class="logo-qrcode" src="{{setting.wxacodeImgUrl}}" background-size="cover" bindtap="previewImageTap" data-src="{{setting.wxacodeImgUrl}}"></image>
+      </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__text">dreamflyhaizei.com</view>
+    </view>
+  </view>
+</view>

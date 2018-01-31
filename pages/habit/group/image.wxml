@@ -1,0 +1,16 @@
+
+<!--pages/habit/group/image.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <view class="weui-cells__title">图片</view>
+    <view class="page-body-info">
+      <image src="{{imageSrc}}" class="image" mode="aspectFit" bindtap="previewImageTap" data-src="{{imageSrc}}">
+      </image>
+    </view>
+    <view class="weui-btn-area" wx:if="{{group.is_creator}}">
+      <button class="weui-btn" type="default" bindtap="chooseImageTap">选择照片</button>
+      <button class="weui-btn" type="primary" bindtap="saveImageTap" disabled="{{form_disabled}}" >保存</button>
+    </view>
+  </view>
+</view>

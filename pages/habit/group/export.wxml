@@ -1,0 +1,85 @@
+<!--pages/habit/group/export.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <view class="weui-cells__title">由于微信小程序不支持手机下载，请在导出数据后复制下载链接到电脑浏览器进行下载</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">开始日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{start_day}}" start="{{picker_start_day}}" end="{{picker_end_day}}" bindchange="bindStartDayChange" disabled="{{disabled}}">
+            <view class="weui-input">{{start_day}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">截止日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{end_day}}" start="{{picker_start_day}}" end="{{picker_end_day}}" bindchange="bindEndDayChange" disabled="{{disabled}}">
+            <view class="weui-input">{{end_day}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips" wx:if="{{export_status==0}}">最多可以导出一个月数据</view>
+    <!--<view class="weui-cells__tips" wx:if="{{export_status==0}}">每天小圈子可以导出三次数据</view>-->
+
+    <view class="weui-btn-area" wx:if="{{export_status==0}}">
+      <button class="weui-btn" type="primary" disabled="{{disabled}}" bindtap='bindExportTap'>导出数据</button>
+    </view>
+
+    <view class="weui-cells__title" wx:if="{{export_status==1}}">统计详情</view>
+    <view wx:if="{{export_status==1}}" class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">总计天数</view>
+        </view>
+        <view class="weui-cell__bd">{{tasks.day}}天
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">打卡次数</view>
+        </view>
+        <view class="weui-cell__bd">{{tasks.daka_counter}}次
+        </view>
+      </view>
+      <view class="weui-cell" wx:if="{{is_creator}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">打卡人数</view>
+        </view>
+        <view class="weui-cell__bd">{{tasks.user_counter}}人
+        </view>
+      </view>
+
+    </view>
+
+    <view class="weui-cells__title" wx:if="{{export_status==1&&tasks.content.length>0 }}">{{end_day}}数据预览(仅提供一天预览)</view>
+
+    <view class="weui-cells weui-cells_after-title" wx:if="{{export_status==1&&tasks.content.length>0  }}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" style="height: 4.3em" value="{{tasks.content}}" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title" wx:if="{{export_status==1 && !isSetClipboardData }}">文件下载地址</view>
+
+    <view class="weui-cells weui-cells_after-title" wx:if="{{export_status==1 && !isSetClipboardData}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" style="height: 4.3em" value="{{tasks.fileurl}}" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-btn-area" wx:if="{{export_status==1 && isSetClipboardData}}">
+      <button class="weui-btn" type="primary" bindtap='bindSetClipboardDataTap'>一键复制网址</button>
+    </view>
+  </view>
+</view>

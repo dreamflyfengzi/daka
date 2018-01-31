@@ -1,0 +1,180 @@
+@import "./view.wxss";
+
+.calendar-root {
+  margin-top: 5px;
+}
+
+.calendar-body {
+  font-weight: 300;
+}
+
+.calendar-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.calendar-navbar-button {
+  flex-grow: 1;
+  width: 100rpx;
+  height: 50rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.calendar-navbar-date {
+  flex-grow: 1;
+  width: 150rpx;
+  height: 50rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.calendar-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80rpx;
+  background: #fff;
+  font-size: 35rpx;
+}
+
+.calendar-head view {
+  text-align: center;
+  flex: 1;
+}
+
+.calendar-body {
+  background: #fff;
+}
+
+.calendar-body-rows {
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  padding: 0 4rpx 4rpx;
+}
+
+.calendar-body-cols {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rpx;
+}
+
+.calendar-body-item {
+  display: block;
+  background: #fff;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.calendar-navbar-button {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.calendar-navbar-button image {
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.calendar-body-day {
+  text-align: center;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+}
+
+.calendar-body-daka {
+  border-radius: 50%;
+  background-color: #2ECB7E;
+  color: #fff;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.calendar-body-active {
+  background-color: #6495ed;
+  color: #fff;
+}
+
+.calendar-body-patchdaka {
+  border-radius: 50%;
+  justify-content: center;
+  font-size: 14px;
+  background-color: #ffa500;
+  color: #fff;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.calendar-body-dayex {
+  text-align: center;
+  font-size: 25rpx;
+}
+
+.calendar-detail {
+  background: #fff;
+}
+
+.calendar-detail-day {
+  display: inline;
+  position: absolute;
+  margin-left: 80rpx;
+  font-size: 100rpx;
+  font-weight: bold;
+  color: red;
+}
+
+.calendar-detail-info1 {
+  margin-left: 210rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.calendar-detail-info2 {
+  margin-left: 210rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  font-size: 25rpx;
+}
+
+.daka-green {
+  color: #2ECB7E;
+  font-size: 25px;
+}
+
+.daka-blue {
+  color: #6495ed;
+  font-size: 25px;
+}
+
+.daka-yellow {
+  color: #ffa500;
+  font-size: 25px;
+}
+
+.daka-weui-media-box__desc_green {
+  color: #2ECB7E;
+}
+
+
+.calendar-title-patchdaka {
+  color: #ffa500;
+}

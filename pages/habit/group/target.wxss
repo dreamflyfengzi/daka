@@ -1,0 +1,7 @@
+/* pages/habit/group/target.wxss */
+button[size="mini"] {
+  padding: 0 1em;
+}
+.weui-btn {
+  margin-top:0px;
+}

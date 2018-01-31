@@ -1,0 +1,15 @@
+/* pages/habit/group/export.wxss */
+
+.mini-btn1 {
+  margin-right: 5px;
+  display: inline-block;
+  padding: 0 1.34em;
+  width: 45%;
+}
+
+.mini-btn2 {
+  margin-left: 5px;
+  display: inline-block;
+  padding: 0 1.34em;
+  width: 45%;
+}

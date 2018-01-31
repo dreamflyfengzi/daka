@@ -1,0 +1,79 @@
+.weui-panel_access:before {
+  border-top: 0rpx solid #FFFFFF;
+  border-radius: 2px;
+}
+
+.weui-panel_access:after {
+  border-bottom: 0rpx solid #FFFFFF;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.weui-media-box {
+  padding: 5px 15px;
+}
+
+.weui-media-box:first-child{
+  padding-top: 10px;
+}
+
+.weui-media-box:before{
+    border-top: 0rpx
+}
+
+
+
+.daka-weui-media-box__thumb {
+  border-radius: 50%;
+}
+
+.daka-weui-media-box__ft:before{
+  border-top: 0rpx;
+  border-bottom: 0rpx;
+}
+
+.daka-weui-media-box__ft{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.daka-weui-panel:after{
+  border-top: 0rpx;
+}
+.daka-weui-panel:before{
+  border-top: 0rpx;
+}
+
+.daka-weui-panel .weui-media-box__hd_in-appmsg {
+  width:36px;
+  height:36px;
+  line-height:36px;
+}
+
+.kind-weak__item-hd {
+  padding: 5rpx 10rpx 20rpx 20rpx;
+  display: flex;
+  transition: opacity .3s;
+  margin: 0 auto;
+}
+.kind-weak__item-hd {
+  padding: 0rpx;
+}
+.kind-weak__item{
+  position:relative;
+  display:block;
+  margin: 0 auto;
+  text-align:center;
+  width: 100%;
+}
+.kind-weak__item-text{
+    justify-content: center;
+}
+.kind-weak__item-today-text{
+  color: #2ECB7E;
+}
+
+.kind-weak__item-img{
+    justify-content: center;
+    color: #C9C9C9
+}

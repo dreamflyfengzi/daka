@@ -1,0 +1,5 @@
+/* pages/habit/profile/group/create.wxss */
+
+.page__hd {
+    padding: 10px;
+}

@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+
+  <view class="page__bd">
+    <view wx:if="{{group.introduction}}" class="weui-cells__title">圈子介绍：{{group.introduction}}</view>
+    <view wx:if="{{day_time}}" class="weui-cells__title">{{day_time}}(补卡)</view>
+
+    <form catchsubmit="dakaSubmit" report-submit='true'>
+
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPickerTargetChange" name="target_type" value="{{target_index}}" range="{{targets}}" range-key="name" disabled="{{targets && targets.length==1?false:false}}">
+              <view class="weui-select">任务类型：{{targets[target_index]["name"]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">任务内容(必填)</view>
+
+      <view wx:if="{{targets[target_index]['type'] == 'select'}}" class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPickerTargetTypeChange" name="target" value="{{target_type_index}}" range="{{targets[target_index]['value']}}">
+              <view class="weui-select">当前选择：{{targets[target_index]['value'][target_type_index]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view wx:elif="{{targets[target_index]['type'] == 'text'}}" class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input name="target" type="text" class="weui-input" bindinput="bindInputChange" />
+          </view>
+        </view>
+      </view>
+      <view wx:elif="{{targets[target_index]['type'] == 'time'}}" class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__bd">
+            <picker mode="time" value="{{target_time}}" start="00:00" end="23:59" bindchange="bindTimeChange" disabled="{{group.target_disabled==1?true:false}}">
+              <view class="weui-select">当前时间：{{target_time}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      <view wx:elif="{{targets[target_index]['type'] == 'walk'}}" class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input name="target" type="number" class="weui-input" value="{{target_walk_input}}" bindinput="bindWalkChange" disabled="{{target_walk_disabled}}" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">送给自己一句话,记录成长的自己</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="" style="height: 3.3em" name="desc" maxlength="-1" bindinput="bindDescChange" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">图片</view>
+      <view class="page-body-info">
+        <block wx:if="{{imageSrc}}">
+          <image src="{{imageSrc}}" class="image" mode="aspectFit">
+            <view class="weui-badge daka-badge-image" bindtap="removeImageTap" data-image_id="{{image.imageId}}">x</view>
+          </image>
+        </block>
+        <block wx:else>
+          <view class="image-plus image-plus-nb" bindtap="chooseImage">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">选择图片</view>
+        </block>
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" disabled="{{form_disabled}}" form-type="submit">打卡</button>
+      </view>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+
+<!--pages/habit/group/edit.wxml-->
+<view class="page">
+  <view class="page__bd">
+ 
+    <view class="weui-panel">
+      <view class="weui-panel__hd">小圈子成员</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <block wx:for="{{members}}" wx:for-item="member">
+              <view class="weui-cell">
+                <view class="weui-cell__hd">
+                  <image src="{{member.avatar_url}}" style="width: 20px;height: 20px;margin-right: 5px" />
+                </view>
+                <view wx:if="{{group.creator == member.user_id}}" class="weui-cell__bd weui-cell_primary">
+                  <view>{{member.nickname}}({{member.counter}})</view>
+                </view>
+                <view wx:else class="weui-cell__bd weui-cell_primary">
+                  <view>{{member.nickname}}({{member.counter}})</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view wx:if="{{group.is_creator && group.creator!= member.user_id}}" class="weui-badge" style="margin-left: 5px;" bindtap="removeUserTap" data-user_id="{{member.user_id}}" data-nickname="{{member.nickname}}">-</view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

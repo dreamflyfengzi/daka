@@ -1,0 +1,23 @@
+
+<!--pages/habit/profile/setting/money.wxml-->
+<view class="container">
+
+  <!-- 头部 -->
+  <view class="header">
+    <view class="group">
+      <text class="name">{{title}}</text>
+    </view>
+  </view>
+
+  <!-- 金额列表 -->
+  <view class="price-list">
+    <image src="{{setting.money.qrcode}}" bindtap="previewImageTap" data-src="{{setting.money.qrcode}}"></image>
+    <view class="money">
+      <text>{{setting.money.course}}</text>
+    </view>
+
+    <view class="money">
+      <text>{{setting.money.introduction}}</text>
+    </view>
+  </view>
+</view>

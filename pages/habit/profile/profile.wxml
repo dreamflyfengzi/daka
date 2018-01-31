@@ -1,0 +1,49 @@
+<!--pages/habit/profile/profile.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator url="/pages/habit/profile/me" class="weui-media-box weui-media-box_appmsg ">
+          <view class="weui-media-box__hd">
+            <image class="userinfo-avatar" src="{{userInfo.avatar_url}}" background-size="cover"></image>
+          </view>
+          <view class="weui-media-box__bd">
+            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
+            <view class="weui-media-box__desc">{{userInfo.motto}}</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
+    <view class="weui-cells">
+      <navigator url="/pages/habit/profile/group/create" class="weui-cell">
+        <view class="weui-cell__bd">{{setting.quanzi}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access weui-cell__ft_create">创建</view>
+      </navigator>
+    </view>
+    <view class="weui-cells__tips">{{setting.quanzi_desc}}</view>
+    <view class="weui-cells" wx:if="{{setting.has_money==1}}">
+      <navigator class="weui-cell" url="/pages/habit/profile/setting/money">
+        <view class="weui-cell__bd">{{setting.dashang}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access weui-cell__ft_create">求包养</view>
+      </navigator>
+    </view>
+    <view class="weui-cells__tips" wx:if="{{setting.has_money==1}}">赏金用于升级硬件改善产品，为大家提供更好的服务</view>
+
+    <view class="weui-cells">
+      <navigator class="weui-cell" url="/pages/habit/profile/setting/about">
+        <view class="weui-cell__bd">关于我们</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">合作</view>
+      </navigator>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">问题反馈</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+          <view class="contact-icon">
+            <contact-button size="22" session-from="weapp" type='default-light'></contact-button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">您有使用过程中有任何问题都可直接反馈</view>
+  </view>
+</view>

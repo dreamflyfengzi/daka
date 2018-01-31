@@ -1,0 +1,5 @@
+/* pages/habit/faxian/index.wxss */
+.daka_weui-media-box__thumb-card{
+  width: 100%;
+  height: 100px;
+}

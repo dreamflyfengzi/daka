@@ -1,0 +1,47 @@
+/* pages/habit/profile/profile.wxss */
+
+.page__bd {
+  margin-top: 10px;
+}
+
+.weui-media-box__bd {
+  flex: 1;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 10rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.weui-cell__ft_create {
+  color: #2ecb7e;
+}
+
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #2ecb7e;
+  text-align: center;
+  vertical-align: middle;
+}
+contact-button{
+  margin-top: 5px;
+}

@@ -1,0 +1,118 @@
+/* pages/index/card.wxss */
+@import "../common/dakaui.wxss";
+
+.page__hd {
+  padding-bottom: 10px;
+}
+
+.list-image {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 3px;
+  left: 20px;
+}
+
+.card {
+  /* white-space: nowrap; */
+  margin-top: 1px;
+}
+
+.item {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+/*
+.item:first-child {
+  margin-left: 30px;
+}
+
+.item:last-child{
+  margin-right: 30px;
+}
+*/
+
+.item-bd {
+  display: block;
+  background: #fff;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 20px;
+  margin-left: 20px;
+  box-shadow: 1px 1px 2px #f8f8f8;
+}
+
+.item-hd {
+  background: #fff;
+  width: 15px;
+}
+
+.item-ft {
+  background: #fff;
+  width: 15px;
+}
+
+.daka_weui-media-box__thumb-card {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+}
+
+.item-bd-name {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.item-bd-target-text {
+  color: #999;
+  font-size: 14px;
+}
+
+.item-bd-target-text-ft {
+  font-size: 22px;
+}
+
+.item-bd-target-ft {
+  position: absolute;
+  bottom: 40px;
+}
+
+.btn-area {
+  /*position: absolute;*/
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.item-bd-target-ft-text {
+  position: relative;
+  text-align: center;
+}
+
+.weui-btn-text {
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.daka-nogroup-tip {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.daka-motto {
+  margin-right: 20px;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.weui-media-box__desc-daka {
+  display: -webkit-box;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  -webkit-box-align: center;
+}

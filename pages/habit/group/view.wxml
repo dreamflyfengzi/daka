@@ -1,0 +1,259 @@
+<!--pages/habit/group/view.wxml-->
+<view class="page">
+<!--
+<view class="page_bd">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft" bindtap="viewDetailGroupTap">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb daka_weui-media-box__thumb" src="{{group.imgurl}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view wx:if="{{group['is_daka'] == true}}" class="weui-media-box__title">{{group.name}} (已打卡)
+              </view>
+              <view wx:else class="weui-media-box__title">{{group.name}}
+              </view>
+              <view class="weui-media-box__desc">已坚持{{group.counter}}次#{{group.target_name}}#</view>
+              <view class="weui-media-box__desc" wx:if="{{group.target_day>0}}">目标天数:{{group.target_day}}</view>
+            </view>
+            <view class="weui-cell__ft_in-access" style="height: 60px;">设置</view>
+          </view>
+
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" wx:if="{{group.id && is_join && group.target_day>0}}">
+            <view class="btn-area">
+              <view class="weui-progress">
+                <view class="weui-progress__bar">
+                  <progress percent="{{progress}}" stroke-width="3" color='#2ECB7E'/>
+                </view>
+                <view class="weui-progress__opr">
+                  {{group.counter}}/{{group.target_day}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft" hover-class="weui-cell_active" bindtap="viewGroupCalendarTap">
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg kind-weak__item-hd">
+              <block wx:for="{{group.weaks}}" wx:key="{{name}}" wx:for-item="weak">
+                <view class="kind-weak__item">
+                  <view class="kind-weak__item-text {{weakday==weak.weak?'kind-weak__item-today-text':''}}">{{weak.name}}</view>
+                  <icon class="icon-small kind-weak__item-img" type="{{weak.status?'success':'success_circle'}}" size="23"  color="#2ECB7E"></icon>
+                </view>
+              </block>
+            </view>
+          </view>
+          <view wx:if="{{group.id && is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button wx:if="{{group['is_daka'] == false}}" class="weui-btn" type="primary" bindtap="checkinGroupTap">打卡
+                <text class="weui-btn-text" wx:if="{{group.daka_limit>1&&group.daka_counter<group.daka_limit}}">(已打卡{{group.daka_counter}}次/共{{group.daka_limit}}次)</text>
+                <text class="weui-btn-text" wx:if="{{group.daka_limit==-1}}">(已打卡{{group.daka_counter}}次/不限制)</text>
+              </button>
+            </view>
+          </view>
+          <view wx:if="{{group.id && group.allow_join == 1 && !is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button class="weui-btn" type="primary" bindtap="joinGroupTap">加入</button>
+            </view>
+          </view>
+          <view wx:if="{{group.id && group.allow_join == 0 && !is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button class="weui-btn" type="primary" disabled=''>当前小圈子不允许加入</button>
+            </view>
+          </view>
+        </view>
+      </view>
+</view>
+-->
+  <view class="page__bd page__bd_spacing">
+    <scroll-view scroll-y="true" style="height: {{scrollHeight}};" bindscrolltolower="onPullDownFeedsRefresh">
+
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft" bindtap="viewDetailGroupTap">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb daka_weui-media-box__thumb" src="{{group.imgurl}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view wx:if="{{group['is_daka'] == true}}" class="weui-media-box__title">{{group.name}} (已打卡)
+              </view>
+              <view wx:else class="weui-media-box__title">{{group.name}}
+              </view>
+              <view class="weui-media-box__desc">已坚持{{group.counter}}次#{{group.target_name}}#</view>
+              <view class="weui-media-box__desc" wx:if="{{group.target_day>0}}">目标天数:{{group.target_day}}</view>
+            </view>
+            <view class="weui-cell__ft_in-access" style="height: 60px;"></view>
+          </view>
+
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" wx:if="{{group.id && is_join && group.target_day>0}}">
+            <view class="btn-area">
+              <view class="weui-progress">
+                <view class="weui-progress__bar">
+                  <progress percent="{{progress}}" stroke-width="3" color='#2ECB7E'/>
+                </view>
+                <view class="weui-progress__opr">
+                  {{group.counter}}/{{group.target_day}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft" hover-class="weui-cell_active" bindtap="viewGroupCalendarTap">
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg kind-weak__item-hd">
+              <block wx:for="{{group.weaks}}" wx:key="{{name}}" wx:for-item="weak">
+                <view class="kind-weak__item">
+                  <view class="kind-weak__item-text {{weakday==weak.weak?'kind-weak__item-today-text':''}}">{{weak.name}}</view>
+                  <icon class="icon-small kind-weak__item-img" type="{{weak.status?'success':'success_circle'}}" size="23"  color="#2ECB7E"></icon>
+                </view>
+              </block>
+            </view>
+          </view>
+          <view wx:if="{{group.id && is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button wx:if="{{group['is_daka'] == false}}" class="weui-btn" type="primary" bindtap="checkinGroupTap">打卡
+                <text class="weui-btn-text" wx:if="{{group.daka_limit>1&&group.daka_counter<group.daka_limit}}">(已打卡{{group.daka_counter}}次/共{{group.daka_limit}}次)</text>
+                <text class="weui-btn-text" wx:if="{{group.daka_limit==-1}}">(已打卡{{group.daka_counter}}次/不限制)</text>
+              </button>
+            </view>
+          </view>
+          <view wx:if="{{group.id && group.allow_join == 1 && !is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button class="weui-btn" type="primary" bindtap="joinGroupTap">加入</button>
+            </view>
+          </view>
+          <view wx:if="{{group.id && group.allow_join == 0 && !is_join}}" class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-media-box__bd_in-appmsg-ft">
+            <view class="btn-area">
+              <button class="weui-btn" type="primary" disabled=''>当前小圈子不允许加入</button>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+      <view class="daka-weui-tab__ranks_hd">
+        <view class="daka-weui-tab__ranks">
+          <view style="float:left;">
+            <view class="daka-weui-tab__rank {{activeFeedIndex == 'feed_all' ? 'daka-weui-tab__rank_on':''}}" bindtap="feedClick" id="feed_all">全部</view>
+            <view class="daka-weui-tab__rank {{activeFeedIndex == 'feed_today' ? 'daka-weui-tab__rank_on':''}}" bindtap="feedClick" id="feed_today">今天</view>
+          </view>
+          <view class="weui-media-box__title-rank" bindtap="viewRankGroupTap">排行</view>
+          <view class="weui-media-box__title-share">
+            <button open-type="share" size="mini" type="default" class="share-button">邀请好友</button>
+          </view>
+          <!--<view class="weui-media-box__title-share" bindtap="viewShareGroupTap">分享成就</view>-->
+        </view>
+      </view>
+      <block wx:for="{{feeds}}" wx:for-item="feed" wx:key="{{id}}" wx:for-index="idx">
+        <view class="weui-panel daka-weui-panel">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_appmsg daka-weui-media-box__ft" hover-class="weui-cell_active" bindtap="viewUserCalendarTap" data-user_id="{{feed.user.id}}" data-feed_index_id="{{idx}}">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb daka-weui-media-box__thumb" src="{{feed.user.avatar_url}}"  lazy-load="true"/>
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg ">
+                <view class="daka-weui-media-box__title">{{feed.user.nickname}}</view>
+                <view class="weui-media-box__desc">{{feed.user.motto}}</view>
+              </view>
+              <view class="weui-media-box__ft weui-media-box__desc">
+                <view>{{feed.show_time}}</view>
+                <view style="text-align:right;">已坚持{{feed.user.counter}}次</view>
+              </view>
+            </view>
+            <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft">
+              <view class="daka-weui-media-box__desc">坚持<text class="daka-weui-media-box__desc_green">#{{group.targets[feed.target_id]?group.targets[feed.target_id]["name"]:feed.target_name}}#</text>
+                <text class="">{{feed.target}}</text>
+              </view>
+              <text class="daka-weui-media-box__desc">{{feed.desc}}</text>
+              <view class="daka-weui-media-box__image-box">
+                <image wx:if="{{feed.images.length>0}}" src="{{feed.images[0]['url']}}" class="daka-weui-media-box__image" data-src="{{feed.images[0]['url']}}" bindtap="previewImageTap" mode="aspectFit" bindload="bindImageLoad" style="width:{{images_width[idx]?images_width[idx]+'px':'100%'}};"
+                  data-image_id="{{idx}}" lazy-load="true"></image>
+              </view>
+            </view>
+
+            <!-- 点赞 -->
+            <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft" wx:if="{{feed.likes && feed.likes.length >0}}">
+
+              <view class="weui-media-box__info daka-weui-media-box__info-like">
+                <view class="weui-media-box__info__meta">
+                  <image class="daka-weui-media-box__thumb_like" src="/image/ic_like.png"></image>
+                  <block wx:for="{{feed.likes}}" wx:for-item="like" wx:key="like_idx">
+                    <image class="daka-weui-media-box__thumb" src="{{users[like.user_id]['avatar_url']}}" lazy-load="true"/>
+                  </block>
+                </view>
+              </view>
+            </view>
+
+            <!-- 分享 -->
+            <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft" wx:if="{{comments[feed.id]}}">
+              <view class="weui-media-box__info daka-weui-media-box__info-like">
+                <view class="weui-media-box__info__meta">
+                  <block wx:for="{{comments[feed.id]}}" wx:for-item="comment" wx:key="comment_idx">
+                    <view class="daka-comment" hover-class="daka-comment_active" data-feed_id="{{feed.id}}" data-comment_id="{{comment.id}}" data-comment_user_id="{{comment.user_id}}" bindtap="bindReplyCommentTap">
+                      <text class="daka-comment-user">{{comment_users[comment.user_id]["nickname"]}}</text>
+                      <block wx:if="{{comment.reply_id>0}}">
+                        回复
+                        <text class="daka-comment-user">{{comment_users[comment.reply_user_id]["nickname"]}}</text>
+                      </block>
+                      <text class="daka-comment-msg">: {{comment.msg}}</text>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+
+            <!-- 点赞 评论 分享-->
+            <view class="weui-media-box__info daka-weui-media-box__info-op" id="comment-id-{{feed.id}}">
+              <view class="weui-flex daka-weui-media-box__info_like">
+                <view class="weui-flex__item weui-flex__item-like" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" bindtap="likeFeedTap">
+                  <view class="placeholder">
+                    <image wx:if="{{feed.is_like == false}}" src="/image/ic_unlike.png"></image>
+                    <image wx:if="{{feed.is_like == true}}" src="/image/ic_like.png"></image>
+                    <view class="weui-flex__item-like-text">{{feed.likenum}}</view>
+                  </view>
+                </view>
+
+                <view class="weui-flex__item weui-flex__item-like" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" bindtap="commentFeedTap">
+                  <view class="placeholder">
+                    <image src="/image/ic_comment.png"></image>
+                    <view class="weui-flex__item-like-text">{{comments[feed.id]?comments[feed.id].length:0}}</view>
+                  </view>
+                </view>
+
+                               <view class="weui-flex__item weui-flex__item-like" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" bindtap="shareFeedTap">
+                  <view class="placeholder">
+                    <image src="/image/ic_share.png"></image>
+                  </view>
+                </view>
+
+                <view wx:if="{{feed.show_edit || feed.show_delete}}" class="weui-flex__item">
+                  <!--wx:if="{{feed.show_more}}" -->
+                  <view class="placeholder weui-flex__item-more" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" data-show_delete="{{feed.show_delete}}" data-show_edit="{{feed.show_edit}}" bindtap="moreFeedTap">
+                    <image src="/image/ic_more.png"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+
+          </view>
+        </view>
+      </block>
+      <view class="weui-panel daka-weui-panel">
+
+        <view class="weui-loadmore" hidden="{{!isFeedPullDownLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view wx:if="{{feeds.length==0 && !isFeedPullDownLoading }}" class="weui-loadmore weui-loadmore_line ">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无动态</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="weui-toptips weui-toptips_info" hidden="{{!info.show?true:false}}">{{info.msg}}</view>
+  </view>
+
+  <view class="comment-input-panel" style="display:{{comment_input.display}};">
+    <button class="comment-pic-icon"></button>
+    <input type="text" bindchange="bindCommentChange" confirm-type="send" placeholder="{{comment_input.placeholder}}" value="{{comment_input.value}}" class="comment-send-input" focus="{{comment_input.focus}}" cursor-spacing="1" bindfocus="bindCommentFocus"
+      bindblur="bindCommentBlur" bindconfirm="bindCommentConfirm"></input>
+    <!--<button bindtap="sendCommentMessageTap" class="comment-send-btn">发送</button>-->
+  </view>
+
+</view>

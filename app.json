@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/habit/group/view",
+    "pages/habit/faxian/index",
+    "pages/habit/group/checkin",
+    "pages/habit/group/target",
+    "pages/habit/group/detail",
+    "pages/habit/group/share",
+    "pages/habit/group/calendar",
+    "pages/habit/group/recheckin",
+    "pages/habit/group/task",
+    "pages/habit/group/export",
+    "pages/habit/group/member",
+    "pages/habit/group/image",
+    "pages/habit/profile/profile",
+    "pages/habit/profile/me",
+    "pages/habit/profile/group/create",
+    "pages/habit/profile/setting/about",
+    "pages/habit/profile/setting/money"
+  ],
+  "window": {
+    "navigationBarTitleText": "一起来打卡",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#2ECB7E",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#2ECB7E",
+    "borderStyle": "#F8F8F8",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/ic_tab_quanzi.png",
+        "selectedIconPath": "image/ic_tab_quanzi_HL.png",
+        "text": "小圈子"
+      },
+      {
+        "pagePath": "pages/habit/profile/profile",
+        "iconPath": "image/ic_tab_profile.png",
+        "selectedIconPath": "image/ic_tab_profile_HL.png",
+        "text": "我"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

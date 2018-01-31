@@ -1,0 +1,29 @@
+
+<!--pages/habit/group/image.wxml-->
+
+<view class="page">
+  <view class="page__bd">
+
+    <!--
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+   -->
+    <canvas class="daka-canvas" canvas-id="feed_canvas" style="height:{{canvas_height}}px"></canvas>
+    <view class="weui-btn-area" hidden="{{is_show}}">
+      <button class="weui-btn" type="primary" bindtap="saveCanvasTap">预览转发</button>
+      <view class="weui-cells__tips" style="text-align:center;">在预览中长按图片,可分享给好友或保存到相册发朋友圈</view>
+    </view>
+  </view>
+</view>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <view class="weui-btn-area">
+      <image wx:if="{{imageSrc}}" src="{{imageSrc}}" class="image" mode="aspectFit" bindtap="previewImageTap" data-src="{{imageSrc}}" style="height:{{imageHeight}}px;"></image>
+      <view wx:else class="weui-cells__tips " style="height:{{imageHeight}}px;">
+        <view class="image-tip">点击自定义背景,生成成就图片</view>
+      </view>
+      <button class="weui-btn" type="primary" bindtap="chooseImageTap" disabled="{{form_disabled}}">自定义背景</button>
+      <view wx:if="{{imageSrc}}" class="weui-cells__tips">点击图片,长按保存到相册或分享给好友</view>
+    </view>
+  </view>
+</view>

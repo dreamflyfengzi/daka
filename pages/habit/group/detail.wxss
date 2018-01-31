@@ -1,0 +1,70 @@
+/* pages/habit/profile/group/edit.wxss */
+
+.weui-media-box__thumb-group {
+  width: 60px;
+  height: 60px;
+}
+
+.image {
+  width: 100%;
+  height: 360rpx;
+}
+
+.page-body-info {
+  display: flex;
+  box-sizing: border-box;
+  padding: 30rpx;
+  height: 420rpx;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-plus {
+  width: 150rpx;
+  height: 150rpx;
+  border: 2rpx solid #d9d9d9;
+  position: relative;
+}
+
+.image-plus-nb {
+  border: 0;
+}
+
+.image-plus-text {
+  color: #888;
+  font-size: 28rpx;
+}
+
+.image-plus-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 4rpx;
+  height: 80rpx;
+  transform: translate(-50%, -50%);
+}
+
+.image-plus-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 80rpx;
+  height: 4rpx;
+  transform: translate(-50%, -50%);
+}
+
+.daka-badge-image {
+  position: absolute;
+  bottom: 30rpx;
+  right: 30rpx;
+  z-index: 2;
+}
+
+button[size="mini"] {
+  padding: 0 1em;
+}

@@ -1,0 +1,314 @@
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb daka_weui-media-box__thumb" src="{{userInfo.avatar_url}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg ">
+            <view class="weui-media-box__title">{{userInfo.nickname}}</view>
+            <view class="weui-media-box__title">{{group.name}}</view>
+          </view>
+
+          <view class="weui-media-box__ft">
+
+            <view class="weui-media-box__desc">已坚持{{group.counter}}次</view>
+
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!--weui tab begin-->
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <view id="group_calendar" class="weui-navbar__item {{activeTabIndex == 'group_calendar' ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">日历</view>
+        </view>
+        <view id="group_feed" class="weui-navbar__item {{activeTabIndex == 'group_feed' ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">动态</view>
+        </view>
+        <view id="group_rank" class="weui-navbar__item {{activeTabIndex == 'group_rank' ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">排行</view>
+        </view>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeTabIndex != 'group_calendar'}}">
+          <view class="calendar-root">
+            <view class="calendar-navbar">
+              <view class="calendar-navbar-button" bindtap="goLastMonth">
+                <image src="/image/left.png"></image>
+              </view>
+              <view class="calendar-navbar-date">
+                {{calendar.date}}</view>
+              <view class="calendar-navbar-button" bindtap="goNextMonth">
+                <image src="/image/right.png"></image>
+              </view>
+            </view>
+            <view class="calendar-head">
+              <view wx:for="日一二三四五六" wx:key="*this">{{item}}</view>
+            </view>
+            <view class="calendar-body">
+              <view class="calendar-body-rows" wx:for="{{calendar.row}}" wx:for-index="row" wx:key="row_id">
+                <view class="calendar-body-cols" wx:for="1234567" wx:for-index="col" wx:key="col_id">
+                  <view class="calendar-body-item" wx:if="{{calendar.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
+                    <view wx:if="{{untasks && untasks[calendar.dateKey+'-'+calendar.arrDays[row * 7 + col]]}}" class="calendar-body-day {{active_key==calendar.dateKey+calendar.arrDays[row * 7 + col]?'calendar-body-active':'calendar-body-patchdaka'}}" bindtap='showCheckinTap'
+                      data-datekey="{{calendar.dateKey}}" data-day="{{calendar.arrDays[row * 7 + col]}}" data-redaka="1">
+                      {{calendar.arrDays[row * 7 + col]}}
+                    </view>
+                    <view wx:elif="{{tasks && tasks[calendar.dateKey] && tasks[calendar.dateKey][calendar.arrDays[row * 7 + col]] > 0}}" class="calendar-body-day calendar-body-daka {{active_key==calendar.dateKey+calendar.arrDays[row * 7 + col]?'calendar-body-active':''}}"
+                      bindtap='showCheckinTap' data-datekey="{{calendar.dateKey}}" data-day="{{calendar.arrDays[row * 7 + col]}}" data-redaka="0">
+                      {{calendar.arrDays[row * 7 + col]}}
+                    </view>
+
+                    <view wx:else class="calendar-body-day" data-datekey="{{calendar.dateKey}}" data-day="{{calendar.arrDays[row * 7 + col]}}" data-redaka="0">
+                      {{calendar.arrDays[row * 7 + col]}}
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="weui-tab__content">
+            <view class="weui-cells__title calendar-title-patchdaka">点击橘色日期可补卡(最近三天)</view>
+
+            <view class="btn-area" style="padding-bottom:10px;">
+
+              <button wx:if="{{is_show_daka}}" class="weui-btn" type="primary" bindtap="checkinTap">补卡({{daka_day}})</button>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info daka-weui-media-box__info-op">
+            <view class="weui-flex daka-weui-media-box__info_like">
+
+            </view>
+          </view>
+          <block wx:for="{{day_feeds}}" wx:for-item="feed" wx:for-index="idx" wx:key="id">
+            <view class="weui-panel daka-weui-panel">
+              <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg daka-weui-media-box__ft">
+                  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb daka-weui-media-box__thumb" src="{{feed.user.avatar_url}}" />
+                  </view>
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg ">
+                    <view class="daka-weui-media-box__title">{{feed.user.nickname}}</view>
+                    <view class="weui-media-box__desc">{{feed.user.motto}}</view>
+                  </view>
+                  <view class="weui-media-box__ft weui-media-box__desc">
+                    <view>{{feed.show_time}}</view>
+                    <view style="text-align:right;">已坚持{{feed.user.counter}}次</view>
+                  </view>
+                </view>
+                <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft">
+                  <view class="daka-weui-media-box__desc">坚持
+                    <text class="daka-weui-media-box__desc_green">#{{group.targets[feed.target_id]?group.targets[feed.target_id]["name"]:feed.target_name}}# </text>
+                    <text>{{feed.target}}</text>
+                  </view>
+                  <text class="daka-weui-media-box__desc">{{feed.desc}}</text>
+                  <view class="daka-weui-media-box__image-box">
+                    <image wx:if="{{feed.images.length>0}}" src="{{feed.images[0]['url']}}" class="daka-weui-media-box__image" data-src="{{feed.images[0]['url']}}" bindtap="previewImageTap" data-index="{{index}}" mode="widthFix"> </image>
+                  </view>
+                </view>
+
+
+                <!-- 点赞 评论 分享-->
+                <view class="weui-media-box__info daka-weui-media-box__info-op">
+                  <view class="weui-flex daka-weui-media-box__info_like">
+
+                  </view>
+                </view>
+
+              </view>
+            </view>
+          </block>
+          <view class="weui-tab__content">
+            <view class="weui-cells__title">数据统计</view>
+            <view class="weui-cells weui-cells_after-title daka-weui-cells">
+              <view wx:if="{{join_day>=0}}" class="weui-cell">
+                <view class="weui-cell__bd">总共加入天数</view>
+                <view class="weui-cell__ft">
+                  <text class="daka-green">{{join_day}}</text>天</view>
+              </view>
+              <view wx:if="{{daka_counter>=0}}" class="weui-cell">
+                <view class="weui-cell__bd">已坚持次数</view>
+                <view class="weui-cell__ft">
+                  <text class="daka-blue">{{daka_counter}}</text>次</view>
+              </view>
+              <view wx:if="{{member_counter>=0}}" class="weui-cell">
+                <view class="weui-cell__bd">参与人数</view>
+                <view class="weui-cell__ft">
+                  <text class="daka-yellow">{{member_counter}}</text>人</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeTabIndex != 'group_feed'}}">
+          <scroll-view scroll-y="true" style="height: {{scrollHeight}};" bindscrolltolower="onPullDownFeedsRefresh">
+            <block wx:for="{{feeds}}" wx:for-item="feed" wx:for-index="idx" wx:key="id">
+              <view class="weui-panel daka-weui-panel">
+                <view class="weui-panel__bd">
+                  <view class="weui-media-box weui-media-box_appmsg daka-weui-media-box__ft">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                      <image class="weui-media-box__thumb daka-weui-media-box__thumb" src="{{feed.user.avatar_url}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg ">
+                      <view class="daka-weui-media-box__title">{{feed.user.nickname}}</view>
+                      <view class="weui-media-box__desc">{{feed.user.motto}}</view>
+                    </view>
+                    <view class="weui-media-box__ft weui-media-box__desc">
+                      <view>{{feed.show_time}}</view>
+                      <view style="text-align:right;">已坚持{{feed.user.counter}}次</view>
+                    </view>
+                  </view>
+                  <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft">
+                    <view class="daka-weui-media-box__desc">坚持
+                      <text class="daka-weui-media-box__desc_green">#{{group.targets[feed.target_id]?group.targets[feed.target_id]["name"]:feed.target_name}}#</text>
+                      <text>{{feed.target}}</text>
+                    </view>
+                    <text class="daka-weui-media-box__desc">{{feed.desc}}</text>
+                    <view class="daka-weui-media-box__image-box">
+                      <image wx:if="{{feed.images.length>0}}" src="{{feed.images[0]['url']}}" class="daka-weui-media-box__image" data-src="{{feed.images[0]['url']}}" bindtap="previewImageTap" data-index="{{index}}" mode="widthFix"> </image>
+                    </view>
+                  </view>
+
+                  <!-- 点赞 -->
+                  <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft" wx:if="{{feed.likes && feed.likes.length >0}}">
+
+                    <view class="weui-media-box__info daka-weui-media-box__info-like">
+                      <view class="weui-media-box__info__meta">
+                        <image class="daka-weui-media-box__thumb_like" src="/image/ic_like.png"></image>
+                        <block wx:for="{{feed.likes}}" wx:for-item="like" wx:key="like_idx">
+                          <image class="daka-weui-media-box__thumb" src="{{users[like.user_id]['avatar_url']}}" />
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+
+                  <!-- 分享 -->
+                  <view class="weui-media-box weui-media-box_text daka-weui-media-box__ft" wx:if="{{comments[feed.id]}}">
+                    <view class="weui-media-box__info daka-weui-media-box__info-like">
+                      <view class="weui-media-box__info__meta">
+                        <block wx:for="{{comments[feed.id]}}" wx:for-item="comment" wx:key="comment_idx">
+                          <view class="daka-comment" hover-class="daka-comment_active" data-feed_id="{{feed.id}}" data-comment_id="{{comment.id}}" data-comment_user_id="{{comment.user_id}}" bindtap="bindReplyCommentTap">
+                            <text class="daka-comment-user">{{comment_users[comment.user_id]["nickname"]}}</text>
+                            <block wx:if="{{comment.reply_id>0}}">
+                              回复
+                              <text class="daka-comment-user">{{comment_users[comment.reply_user_id]["nickname"]}}</text>
+                            </block>
+                            <text class="daka-comment-msg">: {{comment.msg}}</text>
+                          </view>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+
+                  <!-- 点赞 评论 分享-->
+                  <view class="weui-media-box__info daka-weui-media-box__info-op">
+                    <view class="weui-flex daka-weui-media-box__info_like">
+                      <view class="weui-flex__item weui-flex__item-like" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" bindtap="likeFeedTap">
+                        <view class="placeholder">
+                          <image wx:if="{{feed.is_like == false}}" src="/image/ic_unlike.png"></image>
+                          <image wx:if="{{feed.is_like == true}}" src="/image/ic_like.png"></image>
+                          <view class="weui-flex__item-like-text">{{feed.likenum}}</view>
+                        </view>
+                      </view>
+
+                      <view class="weui-flex__item weui-flex__item-like" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" bindtap="commentFeedTap">
+                        <view class="placeholder">
+                          <image src="/image/ic_comment.png"></image>
+                          <view class="weui-flex__item-like-text">{{comments[feed.id]?comments[feed.id].length:0}}</view>
+                        </view>
+                      </view>
+
+                      <view class="weui-flex__item">
+                        <!--wx:if="{{feed.show_more}}" -->
+                        <view class="placeholder weui-flex__item-more" data-feed_id="{{feed.id}}" data-feed_index_id="{{idx}}" data-show_delete="{{feed.show_delete}}" data-show_edit="{{feed.show_edit}}" bindtap="moreFeedTap">
+                          <image src="/image/ic_more.png"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+
+                </view>
+              </view>
+            </block>
+            <view class="weui-loadmore" hidden="{{!isFeedPullDownLoading}}">
+              <view class="weui-loading"></view>
+              <view class="weui-loadmore__tips">正在加载</view>
+            </view>
+            <view wx:if="{{feeds.length==0 && !isFeedPullDownLoading }}" class="weui-loadmore weui-loadmore_line">
+              <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无动态</view>
+            </view>
+            <!--                        <view wx:if="{{feeds.length>0 && !isFeedPullDownLoading }}" class="weui-loadmore weui-loadmore_line weui-loadmore_dot" hidden="{{isFeedNeedLoad}}">
+                            <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+                        </view>
+                        -->
+          </scroll-view>
+
+          <!--panel-->
+        </view>
+        <view class="weui-tab__content" hidden="{{activeTabIndex != 'group_rank'}}">
+          <view class="daka-weui-tab__ranks_hd">
+            <view class="daka-weui-tab__ranks">
+              <view class="daka-weui-tab__rank {{activeRankIndex == 'weak_rank' ? 'daka-weui-tab__rank_on':''}}" bindtap="rankClick" id="weak_rank">周排行</view>
+              <view class="daka-weui-tab__rank {{activeRankIndex == 'month_rank' ? 'daka-weui-tab__rank_on':''}}" bindtap="rankClick" id="month_rank">月排行</view>
+              <view class="daka-weui-tab__rank {{activeRankIndex == 'all_rank' ? 'daka-weui-tab__rank_on':''}}" bindtap="rankClick" id="all_rank">总排行</view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title daka-weui-cells" hidden="{{activeRankIndex != 'weak_rank'}}">
+            <block wx:for="{{ranks.weak}}" wx:for-item="item" wx:key="{{user_id}}">
+              <view class="weui-cell" bindtap="viewUserCalendarRankTap" data-user_id="{{item.user_id}}">
+                <view class="weui-cell__hd">{{item.rank}}</view>
+                <view class="weui-cell__hd">
+                  <image src="{{members[item.user_id].avatar_url}}" class="user-header-img"></image>
+                </view>
+                <view class="weui-cell__bd">{{members[item.user_id].nickname}}</view>
+                <view class="weui-cell__ft">{{item.counter}}</view>
+              </view>
+            </block>
+          </view>
+          <view class="weui-cells weui-cells_after-title daka-weui-cells" hidden="{{activeRankIndex != 'month_rank'}}">
+            <block wx:for="{{ranks.month}}" wx:for-item="item" wx:key="{{user_id}}">
+              <view class="weui-cell" bindtap="viewUserCalendarRankTap" data-user_id="{{item.user_id}}">
+                <view class="weui-cell__hd">{{item.rank}}</view>
+                <view class="weui-cell__hd">
+                  <image src="{{members[item.user_id].avatar_url}}" class="user-header-img"></image>
+                </view>
+                <view class="weui-cell__bd">{{members[item.user_id].nickname}}</view>
+                <view class="weui-cell__ft">{{item.counter}}</view>
+              </view>
+            </block>
+          </view>
+          <view class="weui-cells weui-cells_after-title daka-weui-cells" hidden="{{activeRankIndex != 'all_rank'}}">
+            <block wx:for="{{ranks.all}}" wx:for-item="item" wx:key="{{user_id}}">
+              <view class="weui-cell" bindtap="viewUserCalendarRankTap" data-user_id="{{item.user_id}}">
+                <view class="weui-cell__hd">{{item.rank}}</view>
+                <view class="weui-cell__hd">
+                  <image src="{{members[item.user_id].avatar_url}}" class="user-header-img"></image>
+                </view>
+                <view class="weui-cell__bd">{{members[item.user_id].nickname}}</view>
+                <view class="weui-cell__ft">{{item.counter}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-toptips weui-toptips_info" hidden="{{!info.show?true:false}}">{{info.msg}}</view>
+
+    <!--weui tab end-->
+  </view>
+
+  <!-- 评论输入框-->
+  <view class="comment-input-panel" style="display:{{comment_input.display}};">
+    <button class="comment-pic-icon"></button>
+    <input type="text" bindchange="bindCommentChange" confirm-type="send" placeholder="{{comment_input.placeholder}}" value="{{comment_input.value}}" class="comment-send-input" focus="{{comment_input.focus}}" cursor-spacing="1" bindfocus="bindCommentFocus"
+      bindblur="bindCommentBlur" bindconfirm="bindCommentConfirm"></input>
+    <!--<button bindtap="sendCommentMessageTap" class="comment-send-btn">发送</button>-->
+  </view>
+
+</view>

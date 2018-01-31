@@ -1,0 +1,9 @@
+<template name="foot">
+<!--
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__links">
+      <navigator openType="switchTab" url="/pages/index/index" hover-class="none" class="weui-footer__link">首页</navigator>
+    </view>
+  </view>
+  -->
+</template>

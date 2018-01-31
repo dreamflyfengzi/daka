@@ -1,0 +1,15 @@
+<!--pages/habit/group/task.wxml-->
+
+<view class="page">
+  <view class="page__bd">
+
+    <!--
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+   -->
+    <canvas class="daka-canvas" canvas-id="feed_canvas" style="height:{{canvas_height}}px"></canvas>
+    <view class="weui-btn-area" hidden="{{is_show}}">
+      <button class="weui-btn" type="primary" bindtap="saveCanvasTap">预览转发</button>
+      <view class="weui-cells__tips" style="text-align:center;">在预览中长按图片,可分享给好友或保存到相册发朋友圈</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<!--pages/habit/faxian/index.wxml-->
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <block wx:for="{{groups}}" wx:for-item="group" wx:key="{{id}}">
+      <view class="weui-panel weui-panel_access" bindtap="groupViewTap" data-group_id="{{group.id}}">
+        <view class="weui-panel__bd">
+
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image wx:if="{{group.imgurl!=''}}" class="weui-media-box__thumb daka_weui-media-box__thumb" src="{{group.imgurl}}" />
+          </view>
+        </view>
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_appmsg daka_weui-media-box__ft" hover-class="weui-cell_active">
+
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg ">
+              <view class="weui-media-box__title">{{group.name}}</view>
+              <view class="weui-media-box__desc">已坚持{{group.counter}}次</view>
+            </view>
+            <view wx:if="{{group.daka_counter==0}}" class="weui-media-box__ft">
+              <view class="weui-media-box__desc weui-media-box__desc-daka kind-weak__item-today-text">未打卡</view>
+            </view>
+
+            <view wx:elif="{{group.daka_counter>=group.daka_limit &&group.daka_limit >0}}" class="weui-media-box__ft ">
+              <view class="weui-media-box__desc weui-media-box__desc-daka ">已打卡</view>
+            </view>
+            <view wx:else class="weui-media-box__ft ">
+              <view class="weui-media-box__desc weui-media-box__desc-daka kind-weak__item-today-text">已打卡</view>
+              <view class="weui-media-box__desc">{{group.daka_counter}}次/{{group.daka_limit==-1?'不限制':'共'+group.daka_limit+'次'}}</view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

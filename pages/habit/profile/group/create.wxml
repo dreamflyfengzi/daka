@@ -1,0 +1,77 @@
+<!--pages/habit/group/create.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__desc">和好友一起成长</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <view class="weui-cells ">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">{{quanzi}}名称</view>
+        </view>
+        <view class="weui-cell__bd ">
+          <input class="weui-input" type="text" placeholder="" name="group_name" bindinput="bindGroupNameChange" />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">{{quanzi}}介绍</view>
+        </view>
+        <view class="weui-cell__bd ">
+          <textarea class="weui-textarea" style="height: 3.3em" name="introduction" bindinput="bindIntroductionChange" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">{{is_quanzi?'圈子':''}}任务目标</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">{{is_quanzi?'圈子任务':'任务目标'}}</view>
+        </view>
+        <view class="weui-cell__bd ">
+          <input class="weui-input" type="text" name="target_name" bindinput="bindTargetNameChange" />
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">打卡方式</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerTargetChange" value="{{target_type_index}}" range="{{target_types}}" range-key="name" name="target_type">
+            <view class="weui-input">{{target_types[target_type_index]["name"]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell" wx:if="{{target_types[target_type_index]['key'] == 'select'}}">
+        <view class="weui-cell__hd">
+          <view class="weui-label">选项内容</view>
+        </view>
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="{{target_value_placeholder}}" style="height: 3.3em" name="target_value" bindinput="bindTargetValueChange" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">{{target_types[target_type_index]["tip"]}}</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">每天次数</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindPickerLimitChange" value="{{target_limit_index}}" range="{{target_limits}}" range-key="name" name="target_limit" data-target_idx="{{idx}}">
+            <view class="weui-input">{{target_limits[target_limit_index]["name"]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">每天允许打卡次数</view>
+    <view class="weui-cells__tips">一个小圈子可以有多个任务，创建完成后可在详情页中进行管理</view>
+
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="createGroupSubmit" disabled="{{form_disabled}}">创建</button>
+    </view>
+  </view>
+</view>

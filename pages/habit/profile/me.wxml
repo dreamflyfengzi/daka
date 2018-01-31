@@ -1,0 +1,55 @@
+
+<!--pages/habit/profile/me.wxml-->
+<import src="../../../common/foot.wxml" />
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" hidden="{{error.show?true:false}}">{{error.msg}}</view>
+    <form catchsubmit="editSubmit">
+      <view class="weui-cells__title">个人信息</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input ">
+          <view class="weui-cell__hd">
+            <view class="weui-label">昵称</view>
+          </view>
+          <view class="weui-cell__bd ">
+            <input class="weui-input" type="text" value="{{userInfo.nickname}}" name="nickname" maxlength="20" />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">手机号</view>
+          </view>
+          <view class="weui-cell__bd ">
+            <input class="weui-input" type="number" type="number" value="{{userInfo.telephone}}" name="telephone" maxlength="20" bindinput="bindTelephoneInput"/>
+          </view>
+        </view>
+        <!--
+        <view class="weui-cell weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__hd">
+            <view class="weui-label">验证码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="" name="vcode" maxlength="6" />
+          </view>
+          <view class="weui-cell__ft">
+            <view wx:if="{{isVcodeSended!=2}}" class="weui-vcode-btn" bindtap="sendVcodeTap">获取验证码</view>
+            <view wx:if="{{isVcodeSended==2}}" class="weui-vcode-btn-disabled">获取验证码({{vcodeTime}}s)</view>
+          </view>
+        </view>
+        -->
+      </view>
+      <view class="weui-cells__title">个性签名</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd ">
+            <textarea class="weui-textarea" placeholder="" style="height: 4.3em" name="motto" value="{{userInfo.motto}}" auto-focus="true" maxlength="200" />
+          </view>
+        </view>
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" form-type="submit" disabled="{{form_disabled}}">保存</button>
+      </view>
+    </form>
+  </view>
+  <template is="foot" />
+</view>

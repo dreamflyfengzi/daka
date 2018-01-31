@@ -1,0 +1,6 @@
+/* pages/habit/group/task.wxss */
+
+.daka-canvas{
+  width: 100%;
+  background-color: #ffffff;
+}
